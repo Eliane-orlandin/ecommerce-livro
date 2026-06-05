@@ -11,10 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.blogpessoal.model.Usuario;
-import com.generation.blogpessoal.model.UsuarioLogin;
-import com.generation.blogpessoal.repository.UsuarioRepository;
-import com.generation.blogpessoal.security.JwtService;
+import com.elianeorlandin.ecommerce_livro.model.Usuario;
+import com.elianeorlandin.ecommerce_livro.model.UsuarioLogin;
+import com.elianeorlandin.ecommerce_livro.repository.UsuarioRepository;
+import com.elianeorlandin.ecommerce_livro.security.JwtService;
 
 @Service
 public class UsuarioService {
