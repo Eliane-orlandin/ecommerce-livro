@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.elianeorlandin.ecommerce_livro.model.Usuario;
 import com.elianeorlandin.ecommerce_livro.model.UsuarioLogin;
+import com.elianeorlandin.ecommerce_livro.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
