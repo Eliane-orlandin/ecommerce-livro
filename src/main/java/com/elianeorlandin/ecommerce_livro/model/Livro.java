@@ -1,5 +1,6 @@
 package com.elianeorlandin.ecommerce_livro.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -47,7 +48,7 @@ public class Livro {
 	@NotNull(message = "O preço é obrigatório")
 	@Positive(message = "O preço deve ser maior que zero")
 	@Digits(integer = 6, fraction = 2, message = "O preço deve ter no máximo 6 dígitos inteiros e 2 casas decimais")
-	private Double preco;
+	private BigDecimal preco;
 	
 	@Column(length = 255)
 	@Size(max = 255, message = "A URL da capa não pode ser maior do que 255 caracteres")
@@ -99,11 +100,11 @@ public class Livro {
 		this.descricao = descricao;
 	}
 
-	public Double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(Double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
