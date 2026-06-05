@@ -37,8 +37,8 @@ public class Genero {
 
 	// ---- Relacionamentos entre tabelas ----
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "genero", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties(value = "tema", allowSetters = true)
-	private List<Genero> genero;
+	@JsonIgnoreProperties(value = "genero", allowSetters = true)
+	private List<Livro> livro;
 
 	// ---- Getters e Setters ----
 	public Long getId() {
@@ -65,13 +65,15 @@ public class Genero {
 		this.descricao = descricao;
 	}
 
-	public List<Genero> getGenero() {
-		return genero;
+	public List<Livro> getLivro() {
+		return livro;
 	}
 
-	public void setGenero(List<Genero> genero) {
-		this.genero = genero;
+	public void setLivro(List<Livro> livro) {
+		this.livro = livro;
 	}
+
+
 	
 	
 	
