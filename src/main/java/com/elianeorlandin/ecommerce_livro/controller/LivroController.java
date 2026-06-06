@@ -58,6 +58,9 @@ public class LivroController {
 
 	@PostMapping
 	public ResponseEntity<Livro> post(@Valid @RequestBody Livro livro) {
+		if (livro.getGenero() == null || livro.getGenero().getId() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gênero não existe ou não foi informado!", null);
+		}
 		if (generoRepository.existsById(livro.getGenero().getId())) {
 			livro.setId(null);
 			return ResponseEntity.status(HttpStatus.CREATED).body(livroRepository.save(livro));
@@ -67,6 +70,9 @@ public class LivroController {
 
 	@PutMapping
 	public ResponseEntity<Livro> put(@Valid @RequestBody Livro livro) {
+		if (livro.getGenero() == null || livro.getGenero().getId() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gênero não existe ou não foi informado!", null);
+		}
 		if (livroRepository.existsById(livro.getId())) {
 			if (generoRepository.existsById(livro.getGenero().getId()))
 				return ResponseEntity.status(HttpStatus.OK).body(livroRepository.save(livro));
