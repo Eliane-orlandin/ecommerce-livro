@@ -46,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 
 		} catch (ExpiredJwtException | SignatureException | MalformedJwtException | UsernameNotFoundException e) {
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
+			filterChain.doFilter(request, response);
 		}
 	}
 
