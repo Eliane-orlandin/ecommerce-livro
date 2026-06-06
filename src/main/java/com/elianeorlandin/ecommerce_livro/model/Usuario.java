@@ -3,6 +3,7 @@ package com.elianeorlandin.ecommerce_livro.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,6 +41,7 @@ public class Usuario {
 	@Column(length = 255, nullable = false)
 	@NotBlank(message = "A senha é obrigatória")
 	@Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String senha;
 
 	@Column(length = 255)
