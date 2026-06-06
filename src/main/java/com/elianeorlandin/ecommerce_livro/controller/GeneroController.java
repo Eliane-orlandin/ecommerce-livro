@@ -56,8 +56,11 @@ public class GeneroController {
 	
 	@PutMapping 
     public ResponseEntity<Genero> put(@Valid @RequestBody Genero genero){
+		if (genero.getId() == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
         return generoRepository.findById(genero.getId())
-            .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
+            .map(resposta -> ResponseEntity.status(HttpStatus.OK)
             .body(generoRepository.save(genero)))
             .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
