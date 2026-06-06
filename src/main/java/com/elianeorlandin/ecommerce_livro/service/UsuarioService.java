@@ -53,7 +53,12 @@ public class UsuarioService {
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
-		if (!usuarioRepository.findById(usuario.getId()).isPresent()) {
+		if (usuario.getId() == null) {
+			return Optional.empty();
+		}
+
+		Optional<Usuario> usuarioBanco = usuarioRepository.findById(usuario.getId());
+		if (!usuarioBanco.isPresent()) {
 			return Optional.empty();
 		}
 
@@ -63,25 +68,28 @@ public class UsuarioService {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
 		}
 
-		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		if (usuario.getSenha() != null && !usuario.getSenha().trim().isEmpty()) {
+			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		} else {
+			usuario.setSenha(usuarioBanco.get().getSenha());
+		}
+
 		return Optional.of(usuarioRepository.save(usuario));
 	}
 
-	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
+	public Optional<UsuarioLogin> autenticarUsuario(UsuarioLogin usuarioLogin) {
 
-		if (!usuarioLogin.isPresent()) {
+		if (usuarioLogin == null) {
 			return Optional.empty();
 		}
-
-		UsuarioLogin login = usuarioLogin.get();
 
 		try {
 
 			authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(login.getUsuario(), login.getSenha()));
+					.authenticate(new UsernamePasswordAuthenticationToken(usuarioLogin.getUsuario(), usuarioLogin.getSenha()));
 
-			return usuarioRepository.findByUsuario(login.getUsuario())
-					.map(usuario -> construirRespostaLogin(login, usuario));
+			return usuarioRepository.findByUsuario(usuarioLogin.getUsuario())
+					.map(usuario -> construirRespostaLogin(usuarioLogin, usuario));
 
 		} catch (Exception e) {
 
