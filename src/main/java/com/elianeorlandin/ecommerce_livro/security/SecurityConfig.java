@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,10 +19,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
 	private static final String[] PUBLIC_ENDPOINTS = { "/usuarios/logar", "/usuarios/cadastrar", "/error/**", "/",
-			"/docs", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**" };
+			"/docs", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/graphql", "/graphiql" };
 
 	@Autowired
 	private JwtAuthFilter jwtAuthFilter;
