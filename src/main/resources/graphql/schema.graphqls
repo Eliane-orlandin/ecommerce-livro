@@ -1,0 +1,38 @@
+type Livro {
+    id: ID!
+    titulo: String!
+    autor: String!
+    preco: Float
+    genero: Genero
+}
+
+type Genero {
+    id: ID!
+    nome: String!
+    descricao: String
+}
+
+type Usuario {
+    id: ID!
+    nome: String!
+    usuario: String!
+}
+
+type Query {
+    listarLivros: [Livro]
+    buscarLivroPorId(id: ID!): Livro
+    
+    listarGeneros: [Genero]
+    buscarGeneroPorId(id: ID!): Genero
+    
+    listarUsuarios: [Usuario]
+    buscarUsuarioPorId(id: ID!): Usuario
+}
+
+type Mutation {
+    salvarLivro(titulo: String!, autor: String!, preco: Float, generoId: ID!): Livro
+    deletarLivro(id: ID!): Boolean
+    
+    salvarGenero(nome: String!, descricao: String): Genero
+    deletarGenero(id: ID!): Boolean
+}
